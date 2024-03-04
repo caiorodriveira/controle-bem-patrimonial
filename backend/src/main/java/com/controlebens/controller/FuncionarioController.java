@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.controlebens.DTO.FuncionarioDTO;
 import com.controlebens.DTO.LoginDTO;
+import com.controlebens.DTO.LoginResponseDTO;
 import com.controlebens.config.TokenSecurity;
 import com.controlebens.model.Funcionario;
 import com.controlebens.service.FuncionarioService;
@@ -35,19 +36,23 @@ public class FuncionarioController {
 	private AuthenticationManager authManager;
 
 	@PostMapping("/login")
-	ResponseEntity login(@RequestBody @Valid LoginDTO login) {
+	ResponseEntity login(@RequestBody @Valid LoginDTO login) throws Exception {
 		var userAuthentication = new UsernamePasswordAuthenticationToken(login.getLogin(), login.getSenha());
 		var auth = authManager.authenticate(userAuthentication);
 
 		var token = tokenSecurity.generateToken((Funcionario) auth.getPrincipal());
+		
+		LoginResponseDTO responseDTO = new LoginResponseDTO(
+				token,
+				funcionarioService.buscarFuncionarioPorLogin(login.getLogin())
+				);
 
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(token);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseDTO);
 	}
 
 	@PostMapping
 	ResponseEntity salvarFuncionario(@RequestBody @Valid FuncionarioDTO funcionario) throws Exception {
 
-		try {
 			String encryptedPassword = new BCryptPasswordEncoder().encode(funcionario.getSenha());
 
 			Funcionario newFunc = new Funcionario(null, funcionario.getNome(), funcionario.getCpf(),
@@ -58,10 +63,7 @@ public class FuncionarioController {
 			Funcionario userCreated = funcionarioService.salvarFuncionario(newFunc);
 
 			return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); // try catch temporário até
-																						// implantação do advice
-		}
+
 	}
 
 }

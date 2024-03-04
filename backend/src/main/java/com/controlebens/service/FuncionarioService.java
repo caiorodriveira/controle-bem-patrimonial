@@ -1,5 +1,7 @@
 package com.controlebens.service;
 
+import java.util.Optional;
+
 import org.antlr.v4.runtime.atn.SemanticContext.AND;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +30,16 @@ public class FuncionarioService implements UserDetailsService{
 			funcionarioRepository.save(funcionario);
 			return funcionarioRepository.findByLogin(funcionario.getLogin()).get();
 		}
-		throw new Exception("Usuário não encontrado");//temporário até implantação do controller advicer
+		throw new Exception("Funcionário não encontrado");//temporário até implantação do controller advicer
+	}
+	
+	public Funcionario buscarFuncionarioPorLogin(String login) throws Exception{
+		Optional<Funcionario> encontrado = funcionarioRepository.findByLogin(login);
+		if(encontrado.isPresent()) {
+			return encontrado.get();
+		}
+		else {
+			throw new Exception("Funcionário não encontrado");
+		}
 	}
 }
