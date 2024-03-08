@@ -32,7 +32,8 @@ public class SecurityConfig {
 	                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/docs").permitAll()
 	                        .requestMatchers(HttpMethod.POST, "/funcionario/login").permitAll()
 	                        .requestMatchers("/hello").permitAll()
-	                        .anyRequest().authenticated()
+	                        .requestMatchers("/**").permitAll()
+//	                        .anyRequest().authenticated()
 	                )
 	                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) //verifica antes das condições anteriores se tem o filtro autenticado
 	                .build();
