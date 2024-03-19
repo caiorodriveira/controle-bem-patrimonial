@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.controlebens.enums.EstadosBem;
 import com.controlebens.model.Bem;
 import com.controlebens.service.BemService;
 
@@ -29,6 +30,11 @@ public class BemController {
 	@GetMapping
 	public ResponseEntity<List<Bem>> buscarTodosBens() throws Exception {
 		return ResponseEntity.status(HttpStatus.OK).body(bemService.buscarTodosBens());
+	}
+	
+	@GetMapping("/estado/{estadoBem}")
+	public ResponseEntity<List<Bem>> buscarBensPorEstado(@PathVariable EstadosBem estadoBem) throws Exception{
+		return ResponseEntity.status(HttpStatus.OK).body(bemService.buscarBensPorEstado(estadoBem));
 	}
 
 	@PostMapping

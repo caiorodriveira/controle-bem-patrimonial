@@ -2,8 +2,12 @@ package com.controlebens.model;
 
 import java.math.BigDecimal;
 
+import com.controlebens.enums.EstadosBem;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +38,8 @@ public class Bem {
 	
 	private String local; //clase Local
 	
-	private String estadoBem; //enum
+	@Enumerated(EnumType.STRING)
+	private EstadosBem estadoBem; //enum
 	
 	private boolean alugado;
 	

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.controlebens.enums.EstadosBem;
 import com.controlebens.error.exception.NotFoundBem;
 import com.controlebens.model.Bem;
 import com.controlebens.repository.BemRepository;
@@ -44,5 +45,9 @@ public class BemService {
 			throw new NotFoundBem();
 		}
 		
+	}
+	
+	public List<Bem> buscarBensPorEstado(EstadosBem estadoBem) throws Exception {
+		return bemRepository.findByEstadoBem(estadoBem);
 	}
 }
