@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.controlebens.enums.EstadosBem;
-import com.controlebens.error.exception.NotFoundBem;
+import com.controlebens.error.exception.BemNaoEncontrado;
+import com.controlebens.error.exception.ValorBemInvalido;
 import com.controlebens.model.Bem;
 import com.controlebens.repository.BemRepository;
 
@@ -21,9 +22,11 @@ public class BemService {
 		return bemRepository.findAll();
 	}
 	
-	public Bem salvarBem(Bem bem) {
-		bemRepository.save(bem);
-		return bem;
+	public Bem salvarBem(Bem bem) throws Exception {
+		if(bem.getValorAlugel().equals(null) && bem.getValorAtual().equals(null)) {
+			throw new ValorBemInvalido();
+		}
+		return bemRepository.save(bem);
 	}
 	
 	public Bem editarBem(Bem bem) throws Exception{
@@ -32,7 +35,7 @@ public class BemService {
 			bemRepository.save(bem);
 			return bem;
 		} else {
-			throw new NotFoundBem();
+			throw new BemNaoEncontrado();
 		}
 	}
 	
@@ -42,7 +45,7 @@ public class BemService {
 			bemRepository.deleteById(id);
 			return bem.get();
 		} else {
-			throw new NotFoundBem();
+			throw new BemNaoEncontrado();
 		}
 		
 	}

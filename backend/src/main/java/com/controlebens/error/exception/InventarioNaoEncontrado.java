@@ -1,6 +1,6 @@
 package com.controlebens.error.exception;
 
-public class NotFoundBem extends Exception {
+public class InventarioNaoEncontrado extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
