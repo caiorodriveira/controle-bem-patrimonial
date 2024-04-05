@@ -33,17 +33,17 @@ public class InventarioController {
 	
 	@PostMapping
 	public ResponseEntity<Inventario> salvarInventario(@RequestBody Inventario inventario) throws Exception{
-		return ResponseEntity.status(HttpStatus.OK).body(inventarioService.salvarInventario(inventario));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(inventarioService.salvarInventario(inventario));
 	}
 	
 	@PutMapping
 	public ResponseEntity<Inventario> editarInventario(@RequestBody Inventario inventario) throws Exception {
-		return ResponseEntity.status(HttpStatus.OK).body(inventarioService.editarInventario(inventario));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(inventarioService.editarInventario(inventario));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseDefaultDTO> removernventario(@PathVariable Long id) throws Exception {
-		return ResponseEntity.status(HttpStatus.OK).body(inventarioService.removerInventario(id));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(inventarioService.removerInventario(id));
 	}
 
 }

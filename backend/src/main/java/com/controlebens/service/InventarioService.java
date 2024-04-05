@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.controlebens.DTO.ResponseDefaultDTO;
+import com.controlebens.error.exception.InventarioJaExiste;
 import com.controlebens.error.exception.InventarioNaoEncontrado;
 import com.controlebens.model.Bem;
 import com.controlebens.model.Inventario;
@@ -29,6 +30,8 @@ public class InventarioService {
 	
 	@Transactional
 	public Inventario salvarInventario(Inventario inventario) throws Exception{
+		
+		if(inventarioRepository.findById(inventario.getId()).isPresent()) throw new InventarioJaExiste();
 		
 		BigDecimal valorTotal = BigDecimal.valueOf(0);
 		Timestamp dataAtual = new Timestamp(new Date().getTime());
