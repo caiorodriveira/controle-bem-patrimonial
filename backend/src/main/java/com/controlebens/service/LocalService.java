@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.controlebens.DTO.ResponseDefaultDTO;
-import com.controlebens.error.exception.LocalJaExiste;
 import com.controlebens.error.exception.LocalNaoEncontrado;
 import com.controlebens.model.Local;
 import com.controlebens.repository.LocalRepository;
@@ -35,15 +34,13 @@ public class LocalService {
 	
 	@Transactional
 	public Local salvarLocal(Local local) throws Exception {
-		
-		if(localRepository.findById(local.getId()).isPresent()) throw new LocalJaExiste();
-		
 		return localRepository.save(local);
 	}
 	
 	@Transactional
 	public Local editaLocal(Local local) throws Exception {
-		if(localRepository.findById(local.getId()).isEmpty()) throw new LocalNaoEncontrado();
+		
+		if(localRepository.findById(local.getId()).isEmpty() || local.getId() == null) throw new LocalNaoEncontrado();
 		
 		return localRepository.save(local);
 	}
