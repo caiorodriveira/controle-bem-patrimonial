@@ -24,7 +24,7 @@ public class InconsistenciaService {
 	}
 	
 	@Transactional
-	public Inconsistencia salvarInconsistencia(Inconsistencia inconsistencia) throws Exception{
+	public Inconsistencia salvarInconsistencia(Inconsistencia inconsistencia) throws Exception {
 		return inconsistenciaRepository.save(inconsistencia);
 	}
 	

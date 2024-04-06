@@ -7,18 +7,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.controlebens.error.exception.ExceptionDefault;
 import com.controlebens.error.exception.InventarioJaExiste;
 import com.controlebens.error.exception.InventarioNaoEncontrado;
 import com.controlebens.error.exception.LocalJaExiste;
 import com.controlebens.error.exception.LocalNaoEncontrado;
+import com.controlebens.error.exception.ManutencaoNaoEncontrada;
 import com.controlebens.error.exception.ValorBemInvalido;
+import com.controlebens.error.exception.BemJaExiste;
 import com.controlebens.error.exception.BemNaoEncontrado;
+import com.controlebens.error.exception.ErroGenerico;
 
 @ControllerAdvice
 public class Advice {
 	
 	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ExceptionDefault> erroNaoListado(Exception e) {
+		ExceptionDefault ed = new ExceptionDefault(e.getMessage(), OffsetDateTime.now());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ed);
+	}
+	
+	@ExceptionHandler(ErroGenerico.class)
 	public ResponseEntity<ExceptionDefault> erroGenerico(Exception e) {
 		ExceptionDefault ed = new ExceptionDefault(e.getMessage(), OffsetDateTime.now());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ed);
@@ -28,6 +36,12 @@ public class Advice {
 	public ResponseEntity<ExceptionDefault> bemNaoEncontrado(Exception e) {
 		ExceptionDefault ed = new ExceptionDefault("Bem não encontrado", OffsetDateTime.now());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ed);
+	}
+	
+	@ExceptionHandler(BemJaExiste.class)
+	public ResponseEntity<ExceptionDefault> bemJaExiste(Exception e) {
+		ExceptionDefault ed = new ExceptionDefault("Bem já cadastrado", OffsetDateTime.now());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(ed);
 	}
 	
 	@ExceptionHandler(InventarioNaoEncontrado.class)
@@ -57,6 +71,12 @@ public class Advice {
 	@ExceptionHandler(LocalJaExiste.class)
 	public ResponseEntity<ExceptionDefault> localJaExiste(Exception e) {
 		ExceptionDefault ed = new ExceptionDefault("Local já cadastrado", OffsetDateTime.now());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(ed);
+	}
+	
+	@ExceptionHandler(ManutencaoNaoEncontrada.class)
+	public ResponseEntity<ExceptionDefault> manutencaoNaoEncontrada(Exception e) {
+		ExceptionDefault ed = new ExceptionDefault("Manutenção não encontrada", OffsetDateTime.now());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ed);
 	}
 

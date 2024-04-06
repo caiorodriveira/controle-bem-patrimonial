@@ -1,4 +1,4 @@
-package com.controlebens.error.exception;
+package com.controlebens.error;
 
 import java.time.OffsetDateTime;
 

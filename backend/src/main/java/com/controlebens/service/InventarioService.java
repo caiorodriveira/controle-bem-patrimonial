@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.controlebens.DTO.ResponseDefaultDTO;
 import com.controlebens.error.exception.InventarioJaExiste;
@@ -14,8 +15,6 @@ import com.controlebens.error.exception.InventarioNaoEncontrado;
 import com.controlebens.model.Bem;
 import com.controlebens.model.Inventario;
 import com.controlebens.repository.InventarioRepository;
-
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -30,8 +29,9 @@ public class InventarioService {
 	
 	@Transactional
 	public Inventario salvarInventario(Inventario inventario) throws Exception{
+		if(inventario.getId() != null)
+			if(inventarioRepository.findById(inventario.getId()).isPresent()) throw new InventarioJaExiste();
 		
-		if(inventarioRepository.findById(inventario.getId()).isPresent()) throw new InventarioJaExiste();
 		
 		BigDecimal valorTotal = BigDecimal.valueOf(0);
 		Timestamp dataAtual = new Timestamp(new Date().getTime());
