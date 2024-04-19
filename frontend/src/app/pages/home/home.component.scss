@@ -1,0 +1,26 @@
+section#home {
+  padding-top: 100px;
+
+  #cards-home {
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+    margin-bottom: 100px;
+
+    #card-item {
+      padding: 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      width: 300px;
+
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.3s;
+      }
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+}
