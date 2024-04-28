@@ -21,6 +21,10 @@ section#home {
       &:active {
         transform: scale(1);
       }
+
+      span.material-symbols-outlined{
+        color: darkgray;
+      }
     }
   }
 }
