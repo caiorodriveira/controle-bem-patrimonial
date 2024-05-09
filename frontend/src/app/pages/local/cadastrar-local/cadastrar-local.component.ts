@@ -19,6 +19,7 @@ export class CadastrarLocalComponent {
   tableLocais = new MatTableDataSource<Local>();
   displayedColumns = ['numero', 'tipo', 'descricao', 'bloco', 'edit', 'remove'];
   editar: boolean = false;
+  localEditando: Local | undefined;
   constructor(private fb: FormBuilder, private localService: LocalService) {
     this.formLocalizacao = fb.group({
       id: [null],
@@ -49,9 +50,13 @@ export class CadastrarLocalComponent {
         title: 'Preencha todos os campos'
       })
     } else {
-      edit ?
-        this.editarLocal(this.formLocalizacao.value) :
+      if (edit) {
+        this.localEditando = this.formLocalizacao.value;
+        this.editarLocal(this.formLocalizacao.value)
+      } else {
         this.salvarLocal(this.formLocalizacao.value);
+      }
+
     }
   }
 
@@ -80,6 +85,9 @@ export class CadastrarLocalComponent {
 
   preencherForm(local: Local) {
     this.editar = true;
+    if(this.localEditando != undefined) Swal.fire({icon: 'warning', title: 'Finalize a edição anterior'})
+    else {
+      this.localEditando = local;
     this.formLocalizacao.patchValue({
       id: local.id,
       numero: local.numero,
@@ -90,10 +98,12 @@ export class CadastrarLocalComponent {
     this.locais.splice(this.locais.indexOf(local), 1)
     this.tableLocais.data = this.locais;
   }
+  }
 
   editarLocal(local: Local) {
     this.localService.editarLocal(local).subscribe({
       next: (res) => {
+        this.localEditando = undefined;
         Swal.fire({
           icon: 'success',
           title: `Local ${res.descricao} editado com sucesso`,
@@ -142,6 +152,15 @@ export class CadastrarLocalComponent {
 
       })
     }
+  }
+
+  retornarValores(local: Local) {
+    this.locais.push(local);
+    this.tableLocais.data = this.locais;
+    this.localEditando = undefined;
+    this.formLocalizacao.reset();
+    this.formLocalizacao.controls["tipoLocal"].setValue("");
+    this.editar = false;
   }
 
 }
