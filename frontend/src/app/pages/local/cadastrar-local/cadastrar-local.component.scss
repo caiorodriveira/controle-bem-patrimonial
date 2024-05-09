@@ -1,0 +1,30 @@
+section#local {
+  div#form-cadastro-bem {
+    width: 40%;
+    min-width: 800px;
+    align-self: center;
+
+    form {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 3px;
+      .form-group {
+        width: 50%;
+        min-width: 500;
+        align-self: center;
+      }
+    }
+  }
+  div#consultar-locais {
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    span#expand-circle.material-symbols-outlined {
+      font-size: 35px;
+      font-variation-settings:
+       'FILL' 1,
+       'wght' 400,
+       'GRAD' 0,
+       'opsz' 24;
+    }
+  }
+}
