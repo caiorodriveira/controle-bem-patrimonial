@@ -37,7 +37,7 @@ public class InventarioService {
 		Timestamp dataAtual = new Timestamp(new Date().getTime());
 		
 		for(Bem bem : inventario.getBens()) {			
-			if(bem.getValorAlugel() != null) valorTotal.add(bem.getValorAlugel());
+			if(bem.getValorAluguel() != null) valorTotal.add(bem.getValorAluguel());
 			else valorTotal.add(bem.getValorAtual());
 		}
 		
@@ -61,7 +61,7 @@ public class InventarioService {
 		BigDecimal valorTotal = BigDecimal.valueOf(0);
 		
 		for(Bem bem : inventario.getBens()) {			
-			if(bem.getValorAlugel() != null) valorTotal.add(bem.getValorAlugel());
+			if(bem.getValorAluguel() != null) valorTotal.add(bem.getValorAluguel());
 			else valorTotal.add(bem.getValorAtual());
 		}
 		

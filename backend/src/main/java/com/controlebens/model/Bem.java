@@ -47,5 +47,5 @@ public class Bem {
 	
 	private boolean alugado;
 	
-	private BigDecimal valorAlugel;
+	private BigDecimal valorAluguel;
 }

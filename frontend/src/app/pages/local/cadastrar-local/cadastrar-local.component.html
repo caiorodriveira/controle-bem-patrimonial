@@ -4,6 +4,9 @@
 
   <div id="form-cadastro-bem" class="d-flex flex-column container p-3 mt-5">
 
+    <div class="action">
+      <button class="btn btn-secondary" routerLink="../">Voltar</button>
+    </div>
     <form [formGroup]="formLocalizacao" class="align-self-center py-3 d-flex flex-column mt-3 shadow">
 
       <div class="form-group">
@@ -34,7 +37,7 @@
     </form>
 
     <div class="action mt-3 d-flex justify-content-center gap-5">
-      <button class="btn btn-secondary" *ngIf="editar" (click)="retornarValores(this.formLocalizacao.value)">Voltar</button>
+      <button class="btn btn-secondary" *ngIf="editar" (click)="retornarValores(this.formLocalizacao.value)">Cancelar</button>
       <button class="btn btn-success" (click)="validarForm()" *ngIf="!editar">Salvar</button>
       <button class="btn btn-success" (click)="validarForm(true)" *ngIf="editar">Editar</button>
     </div>

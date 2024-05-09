@@ -11,7 +11,6 @@ import { CadastrarInventarioComponent } from './pages/inventario/cadastrar-inven
 import { ConsultarInventarioComponent } from './pages/inventario/consultar-inventario/consultar-inventario.component';
 import { CadastrarBensComponent } from './pages/bem/cadastrar-bens/cadastrar-bens.component';
 import { ConsultarBensComponent } from './pages/bem/consultar-bens/consultar-bens.component';
-import { ConsultarLocalComponent } from './pages/local/consultar-local/consultar-local.component';
 import { CadastrarLocalComponent } from './pages/local/cadastrar-local/cadastrar-local.component';
 import { CadastrarManutencaoComponent } from './pages/manutencao/cadastrar-manutencao/cadastrar-manutencao.component';
 import { ConsultarManutencaoComponent } from './pages/manutencao/consultar-manutencao/consultar-manutencao.component';
@@ -31,7 +30,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConsultarInventarioComponent,
     CadastrarBensComponent,
     ConsultarBensComponent,
-    ConsultarLocalComponent,
     CadastrarLocalComponent,
     CadastrarManutencaoComponent,
     ConsultarManutencaoComponent

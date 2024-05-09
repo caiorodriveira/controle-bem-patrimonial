@@ -34,7 +34,8 @@ public class BemService {
 	public Bem salvarBem(Bem bem) throws Exception {
 		if(bem.getId() != null)
 			if(bemRepository.findById(bem.getId()).isPresent()) throw new BemJaExiste();
-		if(bem.getValorAlugel().equals(null) && bem.getValorAtual().equals(null)) {
+		
+		if(bem.getValorAluguel()== null && bem.getValorAtual() == null) {
 			throw new ValorBemInvalido();
 		}
 		return bemRepository.save(bem);
