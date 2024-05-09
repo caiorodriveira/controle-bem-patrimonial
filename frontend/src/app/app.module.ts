@@ -17,7 +17,11 @@ import { ConsultarManutencaoComponent } from './pages/manutencao/consultar-manut
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditarBemComponent } from './pages/bem/editar-bem/editar-bem.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConsultarBensComponent,
     CadastrarLocalComponent,
     CadastrarManutencaoComponent,
-    ConsultarManutencaoComponent
+    ConsultarManutencaoComponent,
+    EditarBemComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     // material
     MatTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

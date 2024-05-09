@@ -1,10 +1,7 @@
-<section id="cadastrar-bem" class="d-flex flex-column">
-  <h2 class="text-center mt-5">Cadastrar novo bem</h2>
+<section id="editar-bem" class="d-flex flex-column">
+  <h3 class="text-center mt-5">Editar Bem</h3>
 
-  <div class="action container mt-5 p-0">
-    <button class="btn btn-secondary" routerLink="../../"> Voltar </button>
-  </div>
-  <div id="form-cadastrar" class="container p-3 mt-1 d-flex flex-column">
+  <div id="form-editar" class="container p-3 mt-1 d-flex flex-column">
     <form [formGroup]="formBem" class="align-self-center">
       <div class="form-group row">
         <div class="col-2">
@@ -16,8 +13,8 @@
           <input type="text" id="descricao" class="form-control" formControlName="descricao">
         </div>
       </div>
-      <div class="form-group">
-        <label for="local" class="form-label">Local:</label>
+      <div class="form-group mt-2">
+        <label for="local" class="form-label">Local atual: <span class="fw-bold">{{bem.local.descricao}}</span></label><br>
         <select name="local" id="local" class="form-select" formControlName="local">
           <option value="" select disabled>Selecione o local do bem</option>
           <option [ngValue]="local" *ngFor="let local of locais"> {{local.descricao}} </option>
@@ -41,14 +38,15 @@
       </div>
       <hr>
 
-      <div class="form-group row align-items-center mt-2 w-100">
-        <div class="col-2 d-flex align-items-start gap-3">
+      <div class="form-group row align-items-end mt-2 w-100">
+        <div class="col d-flex align-items-start gap-3">
           <label for="alugado" class="form-label">Alugado:</label>
           <input type="checkbox" formControlName="alugado" id="alugado" name="alugado" #alugado class="form-check">
         </div>
-        <div class="col-4">
+        <div class="col">
+          <label for="valorAluguel" class="form-label">Valor do aluguel:</label>
           <input type="number" name="valorAluguel" id="valorAluguel" class="form-control" formControlName="valorAluguel"
-            [readonly]="!alugado.checked" placeholder="Valor do aluguel">
+            [readonly]="!alugado.checked">
         </div>
       </div>
 
@@ -71,6 +69,6 @@
     </form>
   </div>
   <div class="action container d-flex justify-content-center mt-3">
-    <button class="btn btn-success" (click)="validarForm()">Salvar</button>
+    <button class="btn btn-success" (click)="validarForm()">Editar</button>
   </div>
 </section>

@@ -12,7 +12,7 @@ export class BemService {
   private readonly API = environment.apiUrl + '/bem'
   constructor(private http: HttpClient) { }
 
-  buscarBens(): Observable<Bem[]>{
+  buscarTodosBens(): Observable<Bem[]>{
     return this.http.get<Bem[]>(this.API);
   }
 
@@ -20,4 +20,11 @@ export class BemService {
     return this.http.post<Bem>(this.API, bem);
   }
 
+  removerBem(idBem: number): Observable<any> {
+    return this.http.delete<any>(this.API + '/' + idBem);
+  }
+
+  editarBem(bem: Bem): Observable<Bem> {
+    return this.http.put<Bem>(this.API, bem);
+  }
 }

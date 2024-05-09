@@ -124,8 +124,8 @@ export class CadastrarLocalComponent {
     Swal.fire({
       icon: 'warning',
       title: `Deseja remover o local ${local.descricao}, bloco ${local.bloco}?`,
-      showDenyButton: true,
-      denyButtonText: 'Cancelar',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: 'Remover'
     }).then(res => {
       if (res.isConfirmed) this.removerLocal(local);

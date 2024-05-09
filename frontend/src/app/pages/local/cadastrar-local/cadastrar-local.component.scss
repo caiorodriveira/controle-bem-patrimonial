@@ -26,6 +26,8 @@ section#local {
        'GRAD' 0,
        'opsz' 24;
     }
+    max-height: 1000px;
+    overflow-y: auto;
     table{
       td {
         &:nth-child(5), &:nth-child(6){
