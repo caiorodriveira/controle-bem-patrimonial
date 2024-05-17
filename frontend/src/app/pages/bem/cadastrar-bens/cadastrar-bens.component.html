@@ -4,7 +4,7 @@
   <div class="action container mt-5 p-0">
     <button class="btn btn-secondary" routerLink="../../"> Voltar </button>
   </div>
-  <div id="form-cadastrar" class="container p-3 mt-1 d-flex flex-column">
+  <div id="form-cadastrar" class="container p-3 mt-1 d-flex flex-column shadow">
     <form [formGroup]="formBem" class="align-self-center">
       <div class="form-group row">
         <div class="col-2">
@@ -70,7 +70,9 @@
 
     </form>
   </div>
-  <div class="action container d-flex justify-content-center mt-3">
-    <button class="btn btn-success" (click)="validarForm()">Salvar</button>
+  <div class="action container p-0 d-flex justify-content-between mt-3">
+    <button class="btn btn-secondary px-5" routerLink="/bem/consultar-bem">Listar Bens</button>
+
+    <button class="btn btn-success px-5" (click)="validarForm()">Salvar</button>
   </div>
 </section>

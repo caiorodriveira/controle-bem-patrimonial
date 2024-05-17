@@ -1,1 +1,119 @@
-<p>cadastrar-manutencao works!</p>
+<section id="manutencao">
+
+  <h1 class="text-center mt-5">Cadastro de Manutencção</h1>
+
+  <div id="form-cadastro-manutencao" class="d-flex flex-column container p-3 mt-5">
+
+    <div class="action">
+      <button class="btn btn-secondary" routerLink="../../">Voltar</button>
+    </div>
+    <form [formGroup]="formManutencao" class="align-self-center py-3 d-flex flex-column mt-3 shadow">
+
+      <div class="form-group">
+        <label for="motivo" class="form-label">Motivo:</label>
+        <input type="text" class="form-control" id="motivo" formControlName="motivo">
+      </div>
+
+      <div class="form-group row gap-2">
+        <div class="col-3 p-0">
+          <label for="valor" class="form-label">Valor:</label>
+          <input type="number" class="form-control" id="valor" formControlName="valor">
+        </div>
+        <div class="col p-0">
+          <label for="bem" class="form-label">Bem:</label>
+          <span class="fst-italic fw-bold" *ngIf="editar">{{manutencaoEditando?.bem?.descricao + ' | ' + manutencaoEditando?.bem?.local?.descricao}}</span>
+          <select name="bem" id="bem" class="form-select" formControlName="bem">
+            <option value="" selected disabled>Selecione um bem</option>
+            <option [ngValue]="bem" *ngFor="let bem of bens">{{bem.descricao + ' | ' + bem.local.descricao}}</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="mt-3 text-center fw-bold">Estado:</p>
+      <div class="form-group d-flex justify-content-evenly">
+        <div>
+          <input type="radio" id="aguardando" name="estado" formControlName="estado" value="AGUARDANDO">
+          <label for="aguardando" class="form-label">Aguardando</label>
+        </div>
+        <div>
+          <input type="radio" id="emmanutencao" name="estado" formControlName="estado" value="EM_MANUTENCAO">
+          <label for="emmanutencao" class="form-label">Em Manutenção</label>
+        </div>
+        <div>
+          <input type="radio" id="finalizado" name="estado" value="FINALIZADO" formControlName="estado">
+          <label for="finalizado" class="form-label">Finalizado</label>
+        </div>
+      </div>
+      <hr>
+
+      <div class="form-group row gap-2">
+        <div class="col-5 p-0">
+          <label for="data" class="form-label">Data:</label>
+          <input type="date" name="data" id="data" class="form-control" formControlName="data">
+        </div>
+        <div class="col p-0">
+          <label for="notaFiscal" class="form-label">Nota fiscal:</label>
+          <input type="text" class="form-control" id="notaFiscal" name="notaFiscal" formControlName="notaFiscal">
+        </div>
+      </div>
+
+    </form>
+
+    <div class="action mt-3 d-flex justify-content-center gap-5">
+      <button class="btn btn-secondary" *ngIf="editar" (click)="retornarValores(this.formManutencao.value)">Cancelar</button>
+      <button class="btn btn-success" (click)="validarForm()" *ngIf="!editar">Salvar</button>
+      <button class="btn btn-success" (click)="validarForm(true)" *ngIf="editar">Editar</button>
+    </div>
+
+  </div>
+
+  <div id="consultar-manutencoes" class="d-flex flex-column p-2 mt-3 shadow container">
+    <div class="w-100 d-flex align-items-center" style="cursor: pointer" (click)="verManutencoes = !verManutencoes" *ngIf="verManutencoes">
+      <span class="text-center w-100 fs-5 fw-bold">Esconder manutenções cadastrados</span>
+      <span id="expand-circle" class="material-symbols-outlined text-end">expand_circle_up</span>
+    </div>
+    <div class="w-100 d-flex align-items-center" style="cursor: pointer" (click)="verManutencoes = !verManutencoes" *ngIf="!verManutencoes">
+      <span class="text-center w-100 fs-5 fw-bold">Visualizar manutenções cadastrados</span>
+      <span id="expand-circle" class="material-symbols-outlined text-end">expand_circle_down</span>
+    </div>
+
+    <table mat-table [dataSource]="tableManutencoes" *ngIf="verManutencoes">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Nº </th>
+        <td mat-cell *matCellDef="let manutencao"> {{manutencao.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="motivo">
+        <th mat-header-cell *matHeaderCellDef> Motivo </th>
+        <td mat-cell *matCellDef="let manutencao"> {{manutencao.motivo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef> Valor</th>
+        <td mat-cell *matCellDef="let manutencao"> {{manutencao.valor}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bem">
+        <th mat-header-cell *matHeaderCellDef> Bem </th>
+        <td mat-cell *matCellDef="let manutencao"> {{manutencao.bem.descricao + ' | ' + manutencao.bem.local.descricao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let manutencao"> <span class="material-symbols-outlined text-primary" style="cursor: pointer;" (click)="preencherForm(manutencao)">edit</span> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="remove">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let manutencao"><span class="material-symbols-outlined text-danger" style="cursor: pointer;" (click)="confirmarRemocao(manutencao)">delete</span> </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+</section>
+

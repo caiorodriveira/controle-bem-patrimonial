@@ -4,6 +4,9 @@ table{
       width: 50px;
     }
   }
+  th {
+    background-color: #e0e0e0;
+  }
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
