@@ -15,8 +15,9 @@
       </div>
 
       <div class="form-group row gap-2">
-        <div class="col-3 p-0">
-          <label for="valor" class="form-label">Valor:</label>
+        <label for="valor" class="form-label p-0">Valor:</label>
+        <div class="input-group col-3 p-0">
+          <span class="input-group-text">R$</span>
           <input type="number" class="form-control" id="valor" formControlName="valor">
         </div>
         <div class="col p-0">
@@ -67,7 +68,7 @@
 
   </div>
 
-  <div id="consultar-manutencoes" class="d-flex flex-column p-2 mt-3 shadow container">
+  <div id="consultar-manutencoes" class="d-flex flex-column p-2 mt-3 shadow container mb-3">
     <div class="w-100 d-flex align-items-center" style="cursor: pointer" (click)="verManutencoes = !verManutencoes" *ngIf="verManutencoes">
       <span class="text-center w-100 fs-5 fw-bold">Esconder manutenções cadastrados</span>
       <span id="expand-circle" class="material-symbols-outlined text-end">expand_circle_up</span>
