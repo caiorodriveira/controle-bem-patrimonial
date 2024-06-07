@@ -30,11 +30,16 @@ public class Inventario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String nome;
+	
 	@Column(name = "valor_total")
 	private BigDecimal valorTotal;
 	
 	@Column(name = "data_cadastro")
 	private Timestamp data;
+	
+	@Column(name = "data_utlima_edicao")
+	private Timestamp dataUltimaEdicao;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_local")

@@ -9,15 +9,21 @@ import org.springframework.stereotype.Service;
 import com.controlebens.enums.EstadosBem;
 import com.controlebens.error.exception.BemJaExiste;
 import com.controlebens.error.exception.BemNaoEncontrado;
+import com.controlebens.error.exception.LocalNaoEncontrado;
 import com.controlebens.error.exception.ValorBemInvalido;
 import com.controlebens.model.Bem;
+import com.controlebens.model.Local;
 import com.controlebens.repository.BemRepository;
+import com.controlebens.repository.LocalRepository;
 
 @Service
 public class BemService {
 	
 	@Autowired
 	private BemRepository bemRepository;
+	
+	@Autowired
+	private LocalRepository localReposoitory;
 
 	public List<Bem> buscarTodosBens (){
 		return bemRepository.findAll();
@@ -64,5 +70,13 @@ public class BemService {
 	
 	public List<Bem> buscarBensPorEstado(EstadosBem estadoBem) throws Exception {
 		return bemRepository.findByEstadoBem(estadoBem);
+	}
+	
+	public List<Bem> buscarBensPorLocal(Long idLocal) throws Exception{
+		Optional<Local> local = localReposoitory.findById(idLocal);
+		if(local.isEmpty()) {
+			throw new LocalNaoEncontrado();
+		}		
+		return bemRepository.findByLocal(local.get());
 	}
 }

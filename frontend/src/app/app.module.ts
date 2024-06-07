@@ -22,6 +22,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditarBemComponent } from './pages/bem/editar-bem/editar-bem.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { EditarBemComponent } from './pages/bem/editar-bem/editar-bem.component'
     BrowserAnimationsModule,
     MatDialogModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatAutocompleteModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -64,7 +64,7 @@ public class Advice {
 	
 	@ExceptionHandler(LocalNaoEncontrado.class)
 	public ResponseEntity<ExceptionDefault> localNaoEncontrado(Exception e) {
-		ExceptionDefault ed = new ExceptionDefault("Inventário não encontrado", OffsetDateTime.now());
+		ExceptionDefault ed = new ExceptionDefault("Local não encontrado", OffsetDateTime.now());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ed);
 	}
 	

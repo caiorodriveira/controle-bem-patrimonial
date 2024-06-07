@@ -27,4 +27,12 @@ export class BemService {
   editarBem(bem: Bem): Observable<Bem> {
     return this.http.put<Bem>(this.API, bem);
   }
+
+  buscarBensPorEstado(estadoBem: string): Observable<Bem[]> {
+    return this.http.get<Bem[]>(this.API + '/estado/'+ estadoBem);
+  }
+
+  buscarBensPorLocal(idLocal: number): Observable<Bem[]> {
+    return this.http.get<Bem[]>(this.API + '/local/' + idLocal);
+  }
 }

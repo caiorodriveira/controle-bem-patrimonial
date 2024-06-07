@@ -1,7 +1,7 @@
 import { Local } from "./Local.model"
 
 export interface Bem {
-  id: number,
+  id?: number,
   codigo: string,
   descricao: string,
   valorInicial: number,

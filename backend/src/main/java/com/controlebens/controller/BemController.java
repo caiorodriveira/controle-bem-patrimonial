@@ -33,8 +33,13 @@ public class BemController {
 	}
 	
 	@GetMapping("/estado/{estadoBem}")
-	public ResponseEntity<List<Bem>> buscarBensPorEstado(@PathVariable EstadosBem estadoBem) throws Exception{
+	public ResponseEntity<List<Bem>> buscarBensPorEstado(@PathVariable EstadosBem estadoBem) throws Exception {
 		return ResponseEntity.status(HttpStatus.OK).body(bemService.buscarBensPorEstado(estadoBem));
+	}
+	
+	@GetMapping("/local/{idLocal}")
+	public ResponseEntity<List<Bem>> buscarBensPorLocal(@PathVariable Long idLocal) throws Exception {
+		return ResponseEntity.status(HttpStatus.OK).body(bemService.buscarBensPorLocal(idLocal));
 	}
 
 	@PostMapping

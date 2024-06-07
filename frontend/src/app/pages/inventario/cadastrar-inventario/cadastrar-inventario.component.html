@@ -1,1 +1,73 @@
-<p>cadastrar-inventario works!</p>
+<section id="cadastrar-inventario" class="d-flex flex-column">
+  <h2 class="text-center mt-5">Cadastrar novo inventário</h2>
+
+  <div class="action container mt-5 p-0">
+    <button class="btn btn-secondary" routerLink="../../"> Voltar </button>
+  </div>
+  <div id="form-cadastrar" class="container p-3 mt-1 d-flex flex-column shadow">
+    <form [formGroup]="formInventario" class="align-self-center">
+
+
+      <!-- ler código de barras -->
+
+
+      <div class="form-group row">
+
+        <div class="col">
+          <label for="nome" class="form-label">Nome do inventário:</label>
+          <input type="text" name="nome" id="nome" class="form-control" formControlName="nome">
+        </div>
+
+        <div class="col">
+          <label for="local" class="form-label">Local</label>
+          <input type="text" name="local" id="local" class="form-control" [matAutocomplete]="locaisAutoComplete" formControlName="local" >
+          <mat-autocomplete #locaisAutoComplete="matAutocomplete" (optionSelected)="selecionarLocal($any($event.option).value)">
+              <mat-option *ngFor="let local of locaisFiltrados | async;" [value]="local.descricao">{{local.descricao}}</mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+    </form>
+
+    <div id="table-bens" class="mt-3 d-flex flex-column" *ngIf="localSelecionado">
+
+      <button class="btn btn-dark align-self-end mb-3" (click)="selecionarTodosBensLocal()" *ngIf="selecionarTodosBens">Selecionar todos os bens do local</button>
+      <button class="btn btn-dark align-self-end mb-3" (click)="removerSelecaoTodosBensLocal()" *ngIf="!selecionarTodosBens">Remover todas seleções</button>
+      <table mat-table [dataSource]="tableBem" id="bens" class="shadow">
+
+        <ng-container matColumnDef="codigo">
+          <th mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let bemSelecionar"> {{bemSelecionar.bem.codigo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let bemSelecionar"> {{bemSelecionar.bem.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let bemSelecionar"> {{bemSelecionar.bem.estadoBem}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="local">
+          <th mat-header-cell *matHeaderCellDef> Local </th>
+          <td mat-cell *matCellDef="let bemSelecionar"> {{bemSelecionar.bem.local.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="adicionar">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let bemSelecionar">
+            <input class="form-check" type="checkbox" id="bem-{{bemSelecionar.bem.id}}-selecionar" (click)="adicionarRemoverBem(bemSelecionar.bem)"></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="action container p-0 d-flex justify-content-between mt-3">
+    <button class="btn btn-secondary px-5" routerLink="">Listar Inventários</button>
+
+    <button class="btn btn-success px-5" (click)="validarForm()">Salvar</button>
+  </div>
+</section>

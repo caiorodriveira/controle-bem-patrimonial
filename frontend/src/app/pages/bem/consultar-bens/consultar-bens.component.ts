@@ -13,11 +13,11 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./consultar-bens.component.scss']
 })
 export class ConsultarBensComponent {
-[x: string]: any;
+  [x: string]: any;
 
   bens: Bem[] = [];
   tableBem = new MatTableDataSource<Bem>();
-  displayedColumns = ['codigo', 'nome', 'status', 'local',  'edit', 'delete'];
+  displayedColumns = ['codigo', 'nome', 'status', 'local', 'edit', 'delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private bemService: BemService, public dialog: MatDialog) {
 
@@ -51,38 +51,40 @@ export class ConsultarBensComponent {
       showCancelButton: true,
       cancelButtonText: 'Cancelar'
     }).then(res => {
-      if(res.isConfirmed) this.removerBem(bem);
+      if (res.isConfirmed) this.removerBem(bem);
     })
   }
 
-  removerBem(bem: Bem){
-    this.bemService.removerBem(bem.id).subscribe({
-      next: (res) => {
-        Swal.fire({
-          icon: 'success',
-          title: `Bem ${bem.descricao} | ${bem.codigo} removido com sucesso`,
-          timer: 3000,
-          timerProgressBar: true
-        }).then(() => this.buscarTodosBens())
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: `Erro ao remover bem ${bem.descricao} | ${bem.codigo}`,
-        })
-      }
-    })
+  removerBem(bem: Bem) {
+    if (bem.id) {
+      this.bemService.removerBem(bem.id).subscribe({
+        next: (res) => {
+          Swal.fire({
+            icon: 'success',
+            title: `Bem ${bem.descricao} | ${bem.codigo} removido com sucesso`,
+            timer: 3000,
+            timerProgressBar: true
+          }).then(() => this.buscarTodosBens())
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: `Erro ao remover bem ${bem.descricao} | ${bem.codigo}`,
+          })
+        }
+      })
+    }
   }
 
   abrirEdicao(bem: Bem) {
-    const dialogRef = this.dialog.open(EditarBemComponent, {data: bem});
+    const dialogRef = this.dialog.open(EditarBemComponent, { data: bem });
 
     dialogRef.afterClosed().subscribe(
       () => this.buscarTodosBens()
     )
   }
 
-  filtrarBens(value: string){
+  filtrarBens(value: string) {
     this.tableBem.filter = value;
   }
 

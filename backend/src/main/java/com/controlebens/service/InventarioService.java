@@ -37,14 +37,16 @@ public class InventarioService {
 		Timestamp dataAtual = new Timestamp(new Date().getTime());
 		
 		for(Bem bem : inventario.getBens()) {			
-			if(bem.getValorAluguel() != null) valorTotal.add(bem.getValorAluguel());
-			else valorTotal.add(bem.getValorAtual());
+			if(bem.isAlugado()) valorTotal = valorTotal.add(bem.getValorAluguel());
+			else valorTotal = valorTotal.add(bem.getValorAtual());
 		}
 		
 		Inventario newInventario = new Inventario(
 				null,
+				inventario.getNome(),
 				valorTotal,
 				dataAtual,
+				null,
 				inventario.getLocal(),
 				inventario.getBens());
 		
@@ -58,6 +60,7 @@ public class InventarioService {
 			throw new InventarioNaoEncontrado();
 		}
 		
+		Timestamp dataAtual = new Timestamp(new Date().getTime());
 		BigDecimal valorTotal = BigDecimal.valueOf(0);
 		
 		for(Bem bem : inventario.getBens()) {			
@@ -67,8 +70,10 @@ public class InventarioService {
 		
 		Inventario newInventario = new Inventario(
 				inventario.getId(),
+				inventario.getNome(),
 				valorTotal,
 				inventario.getData(),
+				dataAtual,
 				inventario.getLocal(),
 				inventario.getBens());
 		
