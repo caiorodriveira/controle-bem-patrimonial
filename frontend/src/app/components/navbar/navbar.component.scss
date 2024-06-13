@@ -1,3 +1,15 @@
 .navbar{
   background-color: #A8140C;
 }
+
+.nav-item {
+  border-radius: 5px;
+}
+.nav-item:hover, .active  {
+  background-color: #A8140C;
+  padding: 0 10px;
+}
+
+.dropdown-item{
+  cursor: pointer;
+}

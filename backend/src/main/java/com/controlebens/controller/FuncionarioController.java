@@ -36,7 +36,7 @@ public class FuncionarioController {
 	private AuthenticationManager authManager;
 
 	@PostMapping("/login")
-	ResponseEntity login(@RequestBody @Valid LoginDTO login) throws Exception {
+	ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginDTO login) throws Exception {
 		var userAuthentication = new UsernamePasswordAuthenticationToken(login.getLogin(), login.getSenha());
 		var auth = authManager.authenticate(userAuthentication);
 
@@ -51,7 +51,7 @@ public class FuncionarioController {
 	}
 
 	@PostMapping
-	ResponseEntity salvarFuncionario(@RequestBody @Valid FuncionarioDTO funcionario) throws Exception {
+	ResponseEntity<Funcionario> salvarFuncionario(@RequestBody @Valid FuncionarioDTO funcionario) throws Exception {
 
 			String encryptedPassword = new BCryptPasswordEncoder().encode(funcionario.getSenha());
 

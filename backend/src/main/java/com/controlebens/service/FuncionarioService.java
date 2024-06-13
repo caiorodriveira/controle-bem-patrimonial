@@ -26,11 +26,10 @@ public class FuncionarioService implements UserDetailsService{
 	}
 	
 	public Funcionario salvarFuncionario (Funcionario funcionario) throws Exception{
-		if(funcionarioRepository.findById(funcionario.getId()).isEmpty() & funcionarioRepository.findByLogin(funcionario.getLogin()).isEmpty()) {
-			funcionarioRepository.save(funcionario);
-			return funcionarioRepository.findByLogin(funcionario.getLogin()).get();
+		if(funcionario.getId() == null && funcionarioRepository.findByLogin(funcionario.getLogin()).isEmpty()) {
+			return funcionarioRepository.save(funcionario);
 		}
-		throw new Exception("Funcionário não encontrado");//temporário até implantação do controller advicer
+		throw new Exception("Funcionário já cadastrado");//temporário até implantação do controller advicer
 	}
 	
 	public Funcionario buscarFuncionarioPorLogin(String login) throws Exception{

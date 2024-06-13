@@ -27,6 +27,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { EditarInventarioComponent } from './pages/inventario/editar-inventario/editar-inventario.component';
 import { ScanearBemComponent } from './pages/bem/scanear-bem/scanear-bem.component';
 import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import {MatMenuModule} from '@angular/material/menu';
+import { NaoAutorizadoComponent } from './components/nao-autorizado/nao-autorizado.component';
 
 LOAD_WASM().subscribe();
 
@@ -47,6 +49,7 @@ LOAD_WASM().subscribe();
     EditarBemComponent,
     EditarInventarioComponent,
     ScanearBemComponent,
+    NaoAutorizadoComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ LOAD_WASM().subscribe();
     MatPaginatorModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
+    MatMenuModule
   ],
   providers: [
   ],

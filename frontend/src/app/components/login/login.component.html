@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="login-container w-100">
+  <div class="background-image"></div>
+  <div class="login-form d-flex flex-column align-items-center">
+    <h2 class="text-center text-white mb-3 mt-5">Login</h2>
+    <form class="d-flex flex-column" [formGroup]="formLogin">
+      <div class="mb-3">
+        <label for="login" class="form-label text-white">Login:</label>
+        <input type="text" class="form-control" id="login" name="login" formControlName="login">
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label text-white">Senha:</label>
+        <input type="password" class="form-control" id="senha" name="senha" formControlName="senha">
+      </div>
+      <button type="submit" class="btn btn-danger mt-3" (click)="validarForm($event)">Login</button>
+    </form>
+  </div>
+</div>

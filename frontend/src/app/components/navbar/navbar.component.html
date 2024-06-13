@@ -1,14 +1,19 @@
 <nav class="navbar ">
   <div class="container-fluid">
-    <button class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    <button class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+      aria-controls="offcanvasExample">
       <span class="material-symbols-outlined">
         menu
       </span>
     </button>
 
-    <div>
+    <div style="cursor: pointer" [matMenuTriggerFor]="menu" (click)="setUser()">
       <img src="assets/image/image.png" alt="" style="height: 40px; width: 60px;">
     </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="user">{{user.nome +' | '+user.cargo}}</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
   </div>
 </nav>
 
@@ -20,12 +25,39 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <ul class="navbar-nav">
-      <li class="nav-item d-flex justify-content-@ align-content-center">
-        <span class="material-symbols-outlined">
-          edit_note
-          </span>
-        <a href="" class="nav-link">Bens patrimoniais</a>
+    <ul class="navbar-nav gap-2">
+      <li class="nav-item dropdown mx-3" routerLinkActive="active">
+        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Bens
+        </a>
+        <ul class="dropdown-menu w-100">
+          <li><a class="dropdown-item" routerLink="/bem/consultar-bem" data-bs-dismiss="offcanvas">Consultar Bens</a>
+          </li>
+          <li><a class="dropdown-item" routerLink="/bem/cadastrar-bem" data-bs-dismiss="offcanvas">Cadastrar Bem</a>
+          </li>
+          <li><a class="dropdown-item" (click)="abrirScan()" data-bs-dismiss="offcanvas">Scannear Bem</a></li>
+        </ul>
+      </li>
+      <li class="nav-item mx-3" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false" routerLink="/local">
+          Local
+        </a>
+      </li>
+      <li class="nav-item dropdown mx-3" routerLinkActive="active">
+        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Inventário
+        </a>
+        <ul class="dropdown-menu w-100">
+          <li><a class="dropdown-item" routerLink="/inventario/consultar-inventario"
+              data-bs-dismiss="offcanvas">Consultar Inventário</a></li>
+          <li><a class="dropdown-item" routerLink="/inventario/cadastrar-inventario"
+              data-bs-dismiss="offcanvas">Cadastrar Inventário</a></li>
+        </ul>
+      </li>
+      <li class="nav-item mx-3" routerLinkActive="active" data-bs-dismiss="offcanvas">
+        <a class="nav-link"  role="button" data-bs-toggle="dropdown" aria-expanded="false" routerLink="/manutencao">
+          Manutenção
+        </a>
       </li>
     </ul>
   </div>
