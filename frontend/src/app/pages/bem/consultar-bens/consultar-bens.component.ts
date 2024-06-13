@@ -13,8 +13,6 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./consultar-bens.component.scss']
 })
 export class ConsultarBensComponent {
-  [x: string]: any;
-
   bens: Bem[] = [];
   tableBem = new MatTableDataSource<Bem>();
   displayedColumns = ['codigo', 'nome', 'status', 'local', 'edit', 'delete'];

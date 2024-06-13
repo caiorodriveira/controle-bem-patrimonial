@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_bem")
+@Table(name = "bem")
 public class Bem {
 	
 	@Id
@@ -39,7 +39,7 @@ public class Bem {
 	private BigDecimal valorAtual;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_local")
+	@JoinColumn(name = "id_local_bem")
 	private Local local; //clase Local
 	
 	@Enumerated(EnumType.STRING)

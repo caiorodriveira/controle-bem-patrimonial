@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditarBemComponent } from './pages/bem/editar-bem/editar-bem.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { EditarInventarioComponent } from './pages/inventario/editar-inventario/editar-inventario.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CadastrarLocalComponent,
     CadastrarManutencaoComponent,
     ConsultarManutencaoComponent,
-    EditarBemComponent
+    EditarBemComponent,
+    EditarInventarioComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +56,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatInputModule,
     MatPaginatorModule,
     MatAutocompleteModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

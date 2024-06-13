@@ -1,0 +1,29 @@
+section#editar-inventario{
+    padding: 20px 30px;
+
+  div#form-editar{
+
+    border-radius: 4px;
+    background-color: #e0e0e0;
+
+    form{
+      width: 80%;
+    }
+
+   #table-bens{
+    max-height: 500px;
+    overflow-y: auto;
+    table{
+      td {
+        &:nth-child(5), &:nth-child(6){
+          width: 50px;
+        }
+      }
+      th {
+        background-color: #cccccc;
+      }
+
+    }
+  }
+  }
+}

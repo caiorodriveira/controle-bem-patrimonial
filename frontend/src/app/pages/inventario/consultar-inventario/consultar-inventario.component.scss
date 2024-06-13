@@ -1,0 +1,18 @@
+table{
+  td {
+    &:nth-child(5), &:nth-child(6){
+      width: 50px;
+    }
+
+    span.material-symbols-outlined {
+      cursor: pointer;
+    }
+  }
+  th {
+    background-color: #e0e0e0;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+}

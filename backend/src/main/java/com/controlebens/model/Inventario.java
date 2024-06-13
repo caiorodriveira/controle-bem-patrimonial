@@ -2,17 +2,13 @@ package com.controlebens.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_inventario")
+@Table(name = "inventario")
 public class Inventario {
 
 	@Id
@@ -38,18 +34,11 @@ public class Inventario {
 	@Column(name = "data_cadastro")
 	private Timestamp data;
 	
-	@Column(name = "data_utlima_edicao")
+	@Column(name = "data_ultima_edicao")
 	private Timestamp dataUltimaEdicao;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_local")
+	@ManyToOne
+	@JoinColumn(name = "id_local_inventario")
 	private Local local;
 	
-	@ManyToMany
-    @JoinTable(
-            name = "tb_inventario_bem",
-            joinColumns = @JoinColumn(name = "id_iventario"),
-            inverseJoinColumns = @JoinColumn(name = "id_bem")
-        )
-	private Set<Bem> bens;
 }

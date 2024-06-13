@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_inconsistencia")
+@Table(name = "inconsistencia")
 public class Inconsistencia {
 	
 	@Id

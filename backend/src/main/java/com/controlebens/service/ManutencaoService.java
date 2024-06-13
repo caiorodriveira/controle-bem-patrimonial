@@ -10,7 +10,7 @@ import com.controlebens.DTO.ResponseDefaultDTO;
 import com.controlebens.error.exception.ManutencaoNaoEncontrada;
 import com.controlebens.model.Bem;
 import com.controlebens.model.Manutencao;
-import com.controlebens.model.ManutencaoRepository;
+import com.controlebens.repository.ManutencaoRepository;
 
 import jakarta.transaction.Transactional;
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.controlebens.DTO.InventarioDTO;
 import com.controlebens.DTO.ResponseDefaultDTO;
 import com.controlebens.model.Inventario;
 import com.controlebens.service.InventarioService;
@@ -29,17 +30,22 @@ public class InventarioController {
 	private InventarioService inventarioService;
 	
 	@GetMapping
-	public ResponseEntity<List<Inventario>> buscarTodosInventarios() {
-		return ResponseEntity.status(HttpStatus.OK).body(inventarioService.buscarInventarios());
+	public ResponseEntity<List<InventarioDTO>> buscarTodosInventarios() {
+		return ResponseEntity.status(HttpStatus.OK).body(inventarioService.buscarTodosInventarios());
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<InventarioDTO> buscarInventarioPoriD(@PathVariable Long id) throws Exception {
+		return ResponseEntity.status(HttpStatus.OK).body(inventarioService.buscarInventarioPorId(id));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Inventario> salvarInventario(@RequestBody Inventario inventario) throws Exception{
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(inventarioService.salvarInventario(inventario));
+	public ResponseEntity<Inventario> salvarInventario(@RequestBody InventarioDTO inventario) throws Exception{
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(inventarioService.salvarInventarioEInventarioBem(inventario));
 	}
 	
 	@PutMapping
-	public ResponseEntity<Inventario> editarInventario(@RequestBody Inventario inventario) throws Exception {
+	public ResponseEntity<Inventario> editarInventario(@RequestBody InventarioDTO inventario) throws Exception {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(inventarioService.editarInventario(inventario));
 	}
 	

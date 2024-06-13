@@ -1,16 +1,11 @@
-<section id="cadastrar-inventario" class="d-flex flex-column">
-  <h2 class="text-center mt-5">Cadastrar novo inventário</h2>
+<section id="editar-inventario" class="d-flex flex-column">
+  <h2 class="text-center mt-5">Editar inventário</h2>
 
   <div class="action container mt-5 p-0">
-    <button class="btn btn-secondary" routerLink="../../"> Voltar </button>
+    <button class="btn btn-secondary" (click)="dialogRef.close()"> Voltar </button>
   </div>
-  <div id="form-cadastrar" class="container p-3 mt-1 d-flex flex-column shadow">
+  <div id="form-editar" class="container p-3 mt-1 d-flex flex-column shadow">
     <form [formGroup]="formInventario" class="align-self-center">
-
-
-      <!-- ler código de barras -->
-
-
       <div class="form-group row">
 
         <div class="col">
@@ -57,7 +52,7 @@
         <ng-container matColumnDef="adicionar">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let bemSelecionar">
-            <input class="form-check" type="checkbox" id="bem-{{bemSelecionar.bem.id}}-selecionar" (click)="adicionarRemoverBem(bemSelecionar.bem)"></td>
+            <input class="form-check" type="checkbox" id="bem-{{bemSelecionar.bem.id}}-selecionar" (click)="adicionarRemoverBem(bemSelecionar.bem)"[checked]="primeiraInteracao"></td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -65,9 +60,7 @@
       </table>
     </div>
   </div>
-  <div class="action container p-0 d-flex justify-content-between mt-3">
-    <button class="btn btn-secondary px-5" routerLink="/inventario/consultar-inventario">Listar Inventários</button>
-
-    <button class="btn btn-success px-5" (click)="validarForm()">Salvar</button>
+  <div class="action container p-0 d-flex justify-content-center mt-3">
+    <button class="btn btn-success px-5" (click)="validarForm()">Editar</button>
   </div>
 </section>
