@@ -41,6 +41,11 @@ public class BemController {
 	public ResponseEntity<List<Bem>> buscarBensPorLocal(@PathVariable Long idLocal) throws Exception {
 		return ResponseEntity.status(HttpStatus.OK).body(bemService.buscarBensPorLocal(idLocal));
 	}
+	
+	@GetMapping("/codigo/{codigoBem}")
+	public ResponseEntity<Bem> buscarBemPorCodigo(@PathVariable String codigoBem) throws Exception {
+		return ResponseEntity.status(HttpStatus.OK).body(bemService.buscarBemPorCodigo(codigoBem));
+	}
 
 	@PostMapping
 	public ResponseEntity<Bem> salvarBem(@RequestBody Bem bem) throws Exception {

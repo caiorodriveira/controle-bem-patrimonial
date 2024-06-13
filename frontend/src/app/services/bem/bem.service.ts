@@ -35,4 +35,8 @@ export class BemService {
   buscarBensPorLocal(idLocal: number): Observable<Bem[]> {
     return this.http.get<Bem[]>(this.API + '/local/' + idLocal);
   }
+
+  buscarBemPorCodigo(idCodigo: string): Observable<Bem> {
+    return this.http.get<Bem>(this.API + '/codigo/' + idCodigo);
+  }
 }

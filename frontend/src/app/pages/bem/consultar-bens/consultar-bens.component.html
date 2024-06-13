@@ -3,11 +3,14 @@
 <div class="container mt-5">
   <button class="btn btn-secondary mb-3" routerLink="../../">Voltar</button>
 
-  <mat-form-field class="form-group container align-self-center mt-5" appearance="outline">
-    <mat-label>Pesquisar</mat-label>
-    <input type="text" matInput (input)="filtrarBens($any($event.target).value)">
-    <span class="material-symbols-outlined mx-3" matSuffix>search</span>
-  </mat-form-field>
+  <div id="busca" class="d-flex container align-self-center mt-5 gap-2">
+    <mat-form-field class="form-group flex-grow-1" appearance="outline">
+      <mat-label>Pesquisar</mat-label>
+      <input type="text" matInput (input)="filtrarBens($any($event.target).value)">
+      <span class="material-symbols-outlined mx-3" matSuffix>search</span>
+    </mat-form-field>
+    <button class="btn btn-success mb-4" (click)="abrirScan()"><span class="material-symbols-outlined" style="font-size: 30px;">flip</span></button>
+  </div>
   <div class="shadow">
     <table mat-table [dataSource]="tableBem">
 

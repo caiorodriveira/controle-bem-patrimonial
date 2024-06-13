@@ -1,6 +1,7 @@
 package com.controlebens.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,5 +14,7 @@ public interface BemRepository extends JpaRepository<Bem, Long>{
 	public List<Bem> findByEstadoBem(EstadosBem estadoBem);  
 	
 	public List<Bem> findByLocal(Local local);
+	
+	public Optional<Bem> findByCodigo(String codigo);
 
 }

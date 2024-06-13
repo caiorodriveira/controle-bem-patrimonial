@@ -79,4 +79,14 @@ public class BemService {
 		}		
 		return bemRepository.findByLocal(local.get());
 	}
+	
+	public Bem buscarBemPorCodigo(String codigo) throws Exception {
+		Optional<Bem> bem = bemRepository.findByCodigo(codigo);
+		if(bem.isEmpty()) {
+			throw new BemNaoEncontrado();
+		}
+		
+		return bem.get();
+		
+	}
 }

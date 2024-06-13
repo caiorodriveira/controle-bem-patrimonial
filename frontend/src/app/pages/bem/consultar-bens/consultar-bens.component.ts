@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarBemComponent } from '../editar-bem/editar-bem.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { ScanearBemComponent } from '../scanear-bem/scanear-bem.component';
 
 @Component({
   selector: 'app-consultar-bens',
@@ -84,6 +85,10 @@ export class ConsultarBensComponent {
 
   filtrarBens(value: string) {
     this.tableBem.filter = value;
+  }
+
+  abrirScan(){
+    this.dialog.open(ScanearBemComponent, {data: true});
   }
 
 }
