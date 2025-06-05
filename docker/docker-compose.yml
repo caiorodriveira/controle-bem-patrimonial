@@ -8,7 +8,7 @@ services:
     networks:
       - controle_bens_network
     build:
-      context: ./frontend
+      context: ../frontend
       dockerfile: Dockerfile
     ports:
       - "4200:4200"
@@ -19,21 +19,17 @@ services:
     networks:
       - controle_bens_network
     build: 
-      context: ./backend
+      context: ../backend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    environment:
-      - DATA_URL=jdbc:postgresql://controle_bens_db:5432/controle_bens
-      - DATA_USERNAME=postgres
-      - DATA_PASS=root
-      - JWT_SECRET=my-secret-key
+    env_file:
+      - .env
+      
   controle_bens_db:
     image: postgres:14-alpine
-    environment:
-      - POSTGRES_DB=controle_bens
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=root
+    env_file:
+      - .env
     ports:
       - "5430:5432"
     volumes:
